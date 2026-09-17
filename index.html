@@ -27,73 +27,45 @@ body {
 }
 
 
-/* --- KHUSUS UNTUK TAMPILAN HP (Layar di bawah 768px) --- */
+/* --- PERBAIKAN KHUSUS TAMPILAN HP --- */
 @media screen and (max-width: 768px) {
 
-  /* 1. Mencegah halaman bisa digeser ke kanan-kiri (nyeret) */
-  body, html {
-    width: 100%;
-    overflow-x: hidden !important;
-  }
-
-  /* 2. Mengatur ulang kontainer utama agar ada jarak di pinggir layar HP */
-  .container, .main-container, section {
-    width: 100% !important;
-    padding-left: 15px !important;
-    padding-right: 15px !important;
-    margin-left: 0 !important;
-    margin-right: 0 !important;
-  }
-
-  /* 3. Membuat Navbar / Menu berbaris ke bawah (vertikal) agar tidak bertumpuk */
-  header, nav, .navbar, .menu-container {
-    flex-direction: column !important;
-    align-items: center !important;
-    text-align: center;
-    gap: 10px;
-    padding: 10px !important;
-  }
-
-  nav ul, .menu {
-    flex-direction: column;
-    padding: 0;
-    margin: 0;
-    gap: 8px;
-  }
-
-  /* 4. Menyesuaikan ukuran teks judul agar tidak terlalu besar di HP */
-  h1 {
-    font-size: 1.5rem !important;
-    line-height: 1.3 !important;
-  }
-
-  h2 {
-    font-size: 1.3rem !important;
-  }
-
-  p, span, a {
-    font-size: 0.95rem !important;
-  }
-
-  /* 5. Mengatur SEMUA gambar agar otomatis pas di layar HP dan tidak melar/bocor */
-  img {
+  /* 1. Atur ukuran logo utama agar tidak terlalu besar */
+  header img, .logo img, .profile-logo img {
+    width: 120px !important;  /* Ukuran diameter logo disesuaikan jadi lebih pas */
+    height: 120px !important;
     max-width: 100% !important;
-    height: auto !important;
-    object-fit: cover;
+    object-fit: contain;
+    display: block;
+    margin: 0 auto 15px auto; /* Posisi di tengah dan beri jarak ke bawah */
   }
 
-  /* 6. Jika website Anda menggunakan Grid (kolom produk/kartu), ubah jadi 1 kolom ke bawah */
-  .grid, .row, .card-container, .profil-grid, .sk-grid {
+  /* 2. Rapikan bagian atas (header/navbar) agar tersusun vertikal ke bawah */
+  header, nav, .navbar {
     display: flex !important;
     flex-direction: column !important;
-    gap: 15px !important;
+    align-items: center !important;
+    text-align: center !important;
+    padding: 15px 10px !important;
     width: 100% !important;
   }
 
-  /* Kartu atau box produk menyesuaikan lebar HP */
-  .card, .col {
+  /* 3. Munculkan dan tata menu navigasi di bawah logo agar tidak bergeser ke samping */
+  nav ul, .menu, .nav-links {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    justify-content: center !important;
+    gap: 12px !important;
+    padding: 0 !important;
+    margin: 10px 0 0 0 !important;
+  }
+
+  /* 4. Pastikan teks judul/nama brand tidak terpotong di samping */
+  .brand-title, header h1, .site-title {
+    font-size: 1.4rem !important;
+    text-align: center !important;
     width: 100% !important;
-    margin: 0 !important;
+    white-space: normal !important; /* Mencegah teks memanjang ke samping */
   }
 }
 
