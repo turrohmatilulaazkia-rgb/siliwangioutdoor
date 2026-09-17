@@ -13,30 +13,91 @@
   box-sizing: border-box;
   max-width: 100%;
 }
-/* KHUSUS UNTUK TAMPILAN HP (Layar kecil) */
+    /* --- PENGATURAN UMUM (UNTUK LAPTOP / DEFAULT) --- */
+/* Pastikan body tidak bisa digeser ke samping */
+body {
+  overflow-x: hidden;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
+
+/* --- KHUSUS UNTUK TAMPILAN HP (Layar di bawah 768px) --- */
 @media screen and (max-width: 768px) {
-  /* Membuat menu berbaris ke bawah agar tidak bertumpuk */
-  header, nav, .navbar, .menu-container {
-    flex-direction: column;
-    align-items: flex-start;
+
+  /* 1. Mencegah halaman bisa digeser ke kanan-kiri (nyeret) */
+  body, html {
+    width: 100%;
+    overflow-x: hidden !important;
   }
 
-  /* Mengecilkan ukuran judul utama agar pas di layar HP */
-  h1 {
-    font-size: 22px !important;
-    line-height: 1.3;
-  }
-
-  p, span {
-    font-size: 14px !important;
-  }
-
-  /* Membuat gambar atau banner menyesuaikan lebar layar HP */
-  img {
+  /* 2. Mengatur ulang kontainer utama agar ada jarak di pinggir layar HP */
+  .container, .main-container, section {
     width: 100% !important;
+    padding-left: 15px !important;
+    padding-right: 15px !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+  }
+
+  /* 3. Membuat Navbar / Menu berbaris ke bawah (vertikal) agar tidak bertumpuk */
+  header, nav, .navbar, .menu-container {
+    flex-direction: column !important;
+    align-items: center !important;
+    text-align: center;
+    gap: 10px;
+    padding: 10px !important;
+  }
+
+  nav ul, .menu {
+    flex-direction: column;
+    padding: 0;
+    margin: 0;
+    gap: 8px;
+  }
+
+  /* 4. Menyesuaikan ukuran teks judul agar tidak terlalu besar di HP */
+  h1 {
+    font-size: 1.5rem !important;
+    line-height: 1.3 !important;
+  }
+
+  h2 {
+    font-size: 1.3rem !important;
+  }
+
+  p, span, a {
+    font-size: 0.95rem !important;
+  }
+
+  /* 5. Mengatur SEMUA gambar agar otomatis pas di layar HP dan tidak melar/bocor */
+  img {
+    max-width: 100% !important;
     height: auto !important;
+    object-fit: cover;
+  }
+
+  /* 6. Jika website Anda menggunakan Grid (kolom produk/kartu), ubah jadi 1 kolom ke bawah */
+  .grid, .row, .card-container, .profil-grid, .sk-grid {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 15px !important;
+    width: 100% !important;
+  }
+
+  /* Kartu atau box produk menyesuaikan lebar HP */
+  .card, .col {
+    width: 100% !important;
+    margin: 0 !important;
   }
 }
+
+
 
         /* Navbar */
         nav { background: #0f172a; color: white; padding: 15px 30px; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 1000; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
