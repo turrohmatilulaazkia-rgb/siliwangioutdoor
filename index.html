@@ -3,13 +3,74 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Siliwangi Outdoor Tasikmalaya - Jual & Rental Alat Camping</title>
+    <title>Siliwangi Outdoor Tasikmalaya - Sewa Alat Camping</title>
     <!-- Link CSS Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; scroll-behavior: smooth; }
         body { background-color: #f8fafc; color: #334155; line-height: 1.6; }
-        
+        * {
+  box-sizing: border-box;
+  max-width: 100%;
+}
+    /* --- PENGATURAN UMUM (UNTUK LAPTOP / DEFAULT) --- */
+/* Pastikan body tidak bisa digeser ke samping */
+body {
+  overflow-x: hidden;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
+
+/* --- PERBAIKAN KHUSUS TAMPILAN HP --- */
+@media screen and (max-width: 768px) {
+
+  /* 1. Atur ukuran logo utama agar tidak terlalu besar */
+  header img, .logo img, .profile-logo img {
+    width: 80px !important;  /* Ukuran diameter logo disesuaikan jadi lebih pas */
+    height: 80px !important;
+    max-width: 100% !important;
+    object-fit: contain;
+    display: block;
+    margin: 0 auto 15px auto; /* Posisi di tengah dan beri jarak ke bawah */
+  }
+
+  /* 2. Rapikan bagian atas (header/navbar) agar tersusun vertikal ke bawah */
+  header, nav, .navbar {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    text-align: center !important;
+    padding: 15px 10px !important;
+    width: 100% !important;
+  }
+
+  /* 3. Munculkan dan tata menu navigasi di bawah logo agar tidak bergeser ke samping */
+  nav ul, .menu, .nav-links {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    justify-content: center !important;
+    gap: 12px !important;
+    padding: 0 !important;
+    margin: 10px 0 0 0 !important;
+  }
+
+  /* 4. Pastikan teks judul/nama brand tidak terpotong di samping */
+  .brand-title, header h1, .site-title {
+    font-size: 1.4rem !important;
+    text-align: center !important;
+    width: 100% !important;
+    white-space: normal !important; /* Mencegah teks memanjang ke samping */
+  }
+}
+
+
+
         /* Navbar */
         nav { background: #0f172a; color: white; padding: 15px 30px; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 1000; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
         nav .logo { font-weight: bold; font-size: 1.1rem; display: flex; align-items: center; gap: 8px; }
@@ -29,7 +90,7 @@
         /* Profil Usaha dengan Background Foto Alam & Overlay Semi Gelap */
         .profil-section { 
             position: relative;
-            background: linear-gradient(rgba(88, 29, 22, 0.82), rgba(63, 14, 14, 0.88)), url('img/bg-profil.jpg'); 
+            background: linear-gradient(rgba(88, 29, 22, 0.185), rgba(63, 14, 14, 0.315)), url('img/alam.jpg'); 
             background-size: cover;
             background-position: center;
             color: #f1f5f9; 
@@ -111,89 +172,7 @@
         footer { background: #0f172a; color: #94a3b8; text-align: center; padding: 30px 20px; font-size: 0.9rem; margin-top: 40px; }
         footer a { color: #38bdf8; text-decoration: none; }
     </style>
-    /* Layout Shop by Category */
-.category-container {
-    display: flex;
-    gap: 30px;
-    margin-bottom: 40px;
-    align-items: flex-start;
-}
-
-.category-sidebar {
-    width: 280px;
-    flex-shrink: 0;
-    background: #ffffff;
-    padding: 20px;
-    border-radius: 12px;
-    box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);
-    border: 1px solid #e2e8f0;
-}
-
-.category-sidebar h3 {
-    font-size: 1.2rem;
-    color: #0f172a;
-    margin-bottom: 15px;
-    font-weight: 700;
-}
-
-.category-buttons {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-}
-
-.btn-category {
-    background: #f8fafc;
-    border: 1.5px solid #cbd5e1;
-    border-radius: 8px;
-    padding: 12px 16px;
-    text-align: left;
-    font-size: 0.95rem;
-    font-weight: 600;
-    color: #334155;
-    cursor: pointer;
-    transition: all 0.2s ease;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.btn-category:hover, .btn-category.active {
-    background: #0f172a;
-    color: #ffffff;
-    border-color: #0f172a;
-}
-
-.category-content {
-    flex-grow: 1;
-}
-
-@media (max-width: 768px) {
-    .category-container {
-        flex-direction: column;
-    }
-    .category-sidebar {
-        width: 100%;
-    }
-}
 </head>
-<script>
-        function filterKat(kategori, btn) {
-            // Ubah style tombol aktif
-            document.querySelectorAll('.btn-category').forEach(b => b.classList.remove('active'));
-            btn.classList.add('active');
-
-            // Filter kartu produk berdasarkan atribut data-kat
-            const cards = document.querySelectorAll('.card-alat');
-            cards.forEach(card => {
-                if (kategori === 'semua' || card.getAttribute('data-kat') === kategori) {
-                    card.style.display = 'flex';
-                } else {
-                    card.style.display = 'none';
-                }
-            });
-        }
-    </script>
 <body>
 
     <!-- Navbar -->
@@ -207,7 +186,6 @@
             <a href="#katalog">Katalog & Produk</a>
             <a href="#syarat">Syarat & Ketentuan</a>
             <a href="#lokasi">Lokasi Maps</a>
-            <a href="https://www.instagram.com/siliwangioutdoor_tasikmalaya?stkn=MTMwcTliNjU5M2hlbw==" target="_blank"><i class="fa-brands fa-instagram"></i> Instagram</a>
             <a href="https://wa.me/6282117612206" class="btn-wa-nav" target="_blank"><i class="fa-brands fa-whatsapp"></i> WhatsApp</a>
         </div>
     </nav>
@@ -244,175 +222,13 @@
         </div>
 
         <!-- Katalog & Harga Sewa -->
-        <!-- Katalog dengan Sidebar Kategori ala Webflow -->
         <section id="katalog">
             <div class="section-title">
                 <h2>Katalog Produk & Harga Sewa</h2>
                 <a href="https://wa.me/6282117612206?text=Halo%20Siliwangi%20Outdoor,%20saya%20mau%20menanyakan%20ketersediaan%20alat%20camping." target="_blank" style="background: #25d366; color: white; padding: 10px 18px; border-radius: 6px; text-decoration: none; font-weight: bold; font-size: 0.9rem;"><i class="fa-brands fa-whatsapp"></i> Booking via WhatsApp</a>
             </div>
 
-            <div class="category-container">
-                <!-- Kolom Sidebar Kategori -->
-                <div class="category-sidebar">
-                    <h3>Shop by Category</h3>
-                    <div class="category-buttons">
-                        <button class="btn-category active" onclick="filterKat('semua', this)">Semua Produk</button>
-                        <button class="btn-category" onclick="filterKat('tenda', this)">Tenda</button>
-                        <button class="btn-category" onclick="filterKat('tas', this)">Tas & Carrier</button>
-                        <button class="btn-category" onclick="filterKat('tidur', this)">Perlengkapan Tidur</button>
-                        <button class="btn-category" onclick="filterKat('masak', this)">Alat Masak & Makan</button>
-                        <button class="btn-category" onclick="filterKat('aksesoris', this)">Aksesoris</button>
-                    </div>
-                </div>
-
-                <!-- Area Grid Produk -->
-                <div class="category-content">
-                    <div class="katalog-grid">
-                        
-                        <!-- TENDA -->
-                        <div class="card-alat" data-kat="tenda">
-                            <div class="card-img-container">
-                                <img src="img/tenda 2 org.jpg" alt="Tenda Kapasitas 2 Orang" onerror="this.src='https://images.unsplash.com/photo-1504280390367-361c6d9f38f4?auto=format&fit=crop&w=600&q=80'">
-                                <span class="badge-kat">Tenda</span>
-                            </div>
-                            <div class="card-body">
-                                <h3>Tenda Kapasitas 2 Orang</h3>
-                                <p>Cocok untuk pendakian ringan, tahan angin dan hujan.</p>
-                                <div class="card-footer-info">
-                                    <span class="price">Rp 25.000 <small style="font-size:0.75rem; color:#64748b;">/hari</small></span>
-                                    <span class="stok-info"><i class="fa-solid fa-box-archive"></i> Stok: <strong>5 Unit</strong></span>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="card-alat" data-kat="tenda">
-                            <div class="card-img-container">
-                                <img src="img/tenda 4 orang.jpg" alt="Tenda Kapasitas 4 Orang (NSM 4)" onerror="this.src='https://images.unsplash.com/photo-1504280390367-361c6d9f38f4?auto=format&fit=crop&w=600&q=80'">
-                                <span class="badge-kat">Tenda</span>
-                            </div>
-                            <div class="card-body">
-                                <h3>Tenda Kapasitas 4 Orang (NSM 4)</h3>
-                                <p>Luas, nyaman untuk 4 orang dewasa beserta perlengkapan.</p>
-                                <div class="card-footer-info">
-                                    <span class="price">Rp 40.000 <small style="font-size:0.75rem; color:#64748b;">/hari</small></span>
-                                    <span class="stok-info"><i class="fa-solid fa-box-archive"></i> Stok: <strong>3 Unit</strong></span>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- TAS & CARRIER -->
-                        <div class="card-alat" data-kat="tas">
-                            <div class="card-img-container">
-                                <img src="img/ransel 45 lt.jpg" alt="Ransel / Keril 45 Liter" onerror="this.src='https://images.unsplash.com/photo-1504280390367-361c6d9f38f4?auto=format&fit=crop&w=600&q=80'">
-                                <span class="badge-kat">Tas & Carrier</span>
-                            </div>
-                            <div class="card-body">
-                                <h3>Ransel / Keril 45 Liter</h3>
-                                <p>Kapasitas sedang, punggung empuk dan nyaman untuk pendakian 1-2 hari.</p>
-                                <div class="card-footer-info">
-                                    <span class="price">Rp 20.000 <small style="font-size:0.75rem; color:#64748b;">/hari</small></span>
-                                    <span class="stok-info"><i class="fa-solid fa-box-archive"></i> Stok: <strong>10 Unit</strong></span>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="card-alat" data-kat="tas">
-                            <div class="card-img-container">
-                                <img src="img/ransel.jpg" alt="Ransel / Keril 60 Liter" onerror="this.src='https://images.unsplash.com/photo-1504280390367-361c6d9f38f4?auto=format&fit=crop&w=600&q=80'">
-                                <span class="badge-kat">Tas & Carrier</span>
-                            </div>
-                            <div class="card-body">
-                                <h3>Ransel / Keril 60 Liter</h3>
-                                <p>Kapasitas besar, punggung empuk dan nyaman untuk pendakian 2-3 hari.</p>
-                                <div class="card-footer-info">
-                                    <span class="price">Rp 30.000 <small style="font-size:0.75rem; color:#64748b;">/hari</small></span>
-                                    <span class="stok-info"><i class="fa-solid fa-box-archive"></i> Stok: <strong>6 Unit</strong></span>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- PERLENGKAPAN TIDUR -->
-                        <div class="card-alat" data-kat="tidur">
-                            <div class="card-img-container">
-                                <img src="img/slipping bag.jpg" alt="Sleeping Bag" onerror="this.src='https://images.unsplash.com/photo-1504280390367-361c6d9f38f4?auto=format&fit=crop&w=600&q=80'">
-                                <span class="badge-kat">Perlengkapan Tidur</span>
-                            </div>
-                            <div class="card-body">
-                                <h3>Sleeping Bag</h3>
-                                <p>Model polar hangat, menjaga suhu tubuh tetap stabil di gunung.</p>
-                                <div class="card-footer-info">
-                                    <span class="price">Rp 10.000 <small style="font-size:0.75rem; color:#64748b;">/hari</small></span>
-                                    <span class="stok-info"><i class="fa-solid fa-box-archive"></i> Stok: <strong>15 Unit</strong></span>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="card-alat" data-kat="tidur">
-                            <div class="card-img-container">
-                                <img src="img/matras.jpg" alt="Matras" onerror="this.src='https://images.unsplash.com/photo-1504280390367-361c6d9f38f4?auto=format&fit=crop&w=600&q=80'">
-                                <span class="badge-kat">Perlengkapan Tidur</span>
-                            </div>
-                            <div class="card-body">
-                                <h3>Matras</h3>
-                                <p>Matras spons gulung standar sebagai alas pelindung dari lantai tenda.</p>
-                                <div class="card-footer-info">
-                                    <span class="price">Rp 5.000 <small style="font-size:0.75rem; color:#64748b;">/hari</small></span>
-                                    <span class="stok-info"><i class="fa-solid fa-box-archive"></i> Stok: <strong>18 Unit</strong></span>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- ALAT MASAK & MAKAN -->
-                        <div class="card-alat" data-kat="masak">
-                            <div class="card-img-container">
-                                <img src="img/ds-308.jpg" alt="Cooking Set (DS-308)" onerror="this.src='https://images.unsplash.com/photo-1504280390367-361c6d9f38f4?auto=format&fit=crop&w=600&q=80'">
-                                <span class="badge-kat">Alat Masak & Makan</span>
-                            </div>
-                            <div class="card-body">
-                                <h3>Cooking Set (DS-308)</h3>
-                                <p>Panci susun praktis bahan teflon anti lengket untuk masak di alam.</p>
-                                <div class="card-footer-info">
-                                    <span class="price">Rp 15.000 <small style="font-size:0.75rem; color:#64748b;">/hari</small></span>
-                                    <span class="stok-info"><i class="fa-solid fa-box-archive"></i> Stok: <strong>6 Unit</strong></span>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="card-alat" data-kat="masak">
-                            <div class="card-img-container">
-                                <img src="img/kompor kotak.jpg" alt="Kompor Kotak" onerror="this.src='https://images.unsplash.com/photo-1504280390367-361c6d9f38f4?auto=format&fit=crop&w=600&q=80'">
-                                <span class="badge-kat">Alat Masak & Makan</span>
-                            </div>
-                            <div class="card-body">
-                                <h3>Kompor Kotak</h3>
-                                <p>Kompor mini lipat portabel yang ringan dan hemat tempat untuk memasak.</p>
-                                <div class="card-footer-info">
-                                    <span class="price">Rp 10.000 <small style="font-size:0.75rem; color:#64748b;">/hari</small></span>
-                                    <span class="stok-info"><i class="fa-solid fa-box-archive"></i> Stok: <strong>10 Unit</strong></span>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- AKSESORIS -->
-                        <div class="card-alat" data-kat="aksesoris">
-                            <div class="card-img-container">
-                                <img src="img/plyshit 34.jpg" alt="Flysheet 3x4" onerror="this.src='https://images.unsplash.com/photo-1504280390367-361c6d9f38f4?auto=format&fit=crop&w=600&q=80'">
-                                <span class="badge-kat">Aksesoris</span>
-                            </div>
-                            <div class="card-body">
-                                <h3>Flysheet 3x4</h3>
-                                <p>Lembaran kain kanopi ukuran 3x4 meter untuk pelindung ekstra dari hujan.</p>
-                                <div class="card-footer-info">
-                                    <span class="price">Rp 15.000 <small style="font-size:0.75rem; color:#64748b;">/hari</small></span>
-                                    <span class="stok-info"><i class="fa-solid fa-box-archive"></i> Stok: <strong>8 Unit</strong></span>
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-            </div>
-        </section>
+            <div class="katalog-grid">
                 
                 <!-- Item 1 -->
                 <div class="card-alat">
@@ -500,6 +316,13 @@
                         <img src="img/tendaki malano.jpg" alt="Tendaki Malano Kapasitas 4-5 Orang" onerror="this.src='https://images.unsplash.com/photo-1504280390367-361c6d9f38f4?auto=format&fit=crop&w=600&q=80'">
                         <span class="badge-kat">Tenda & Pendakian</span>
                     </div>
+                    <div class="card-body">
+                        <h3>Tendaki Malano Kapasitas 4-5 Orang</h3>
+                        <p>Tenda premium berkapasitas 4-5 orang dengan spesifikasi tinggi dan memiliki ruang depan atau teras.</p>
+                        <div class="card-footer-info">
+                            <span class="price">Rp 100.000 <small style="font-size:0.75rem; color:#64748b;">/hari</small></span>
+                            <span class="stok-info"><i class="fa-solid fa-box-archive"></i> Stok: <strong>5 Unit</strong></span>
+                        </div>
                     </div>
                 </div>
 
